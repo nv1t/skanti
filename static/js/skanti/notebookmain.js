@@ -136,7 +136,11 @@ $(document).ready(function () {
 
 		$(window).error(function(msg, url, line){
         skanti.pager.expand()
-        skanti.pager.append_html('<span style="color:red;">'+msg+'</span>')
+        skanti.pager.append_html('<span style="color:red;">')
+        skanti.pager.append_html('Error in "'+msg['originalEvent']['filename']+'" on line '+msg['originalEvent']['lineno']+':')
+        skanti.pager.append_html(msg['originalEvent']['message'])
+        skanti.pager.append_html('</span>')
+        
 				console.log(msg);
         //alert( { msg: msg, url: url, line: line });
         //this.preventDefault();

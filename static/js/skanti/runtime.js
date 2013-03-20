@@ -15,7 +15,7 @@ var skanti = (function (skanti) {
         }
 */
 	//$('#'+cell).append($('<p/>').html(code))
-	console.log(code)
+	//console.log(code)
         $('#'+cell.cell_id).append($('<script/>').attr('type','text/javascript').html(code))
     }
 

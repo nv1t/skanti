@@ -29,29 +29,7 @@ var skanti = (function (skanti) {
         var app_height = h - header_height - 2;  // content height
 
         $('div#main_app').height(app_height + 2);  // content+padding+border height
-
-        $('div#left_panel').height(app_height);
-
-        $('div#left_panel_splitter').height(app_height);
-
         $('div#notebook_panel').height(app_height);
-        var left_panel_width = $('div#left_panel').outerWidth();
-        var left_panel_splitter_width = $('div#left_panel_splitter').outerWidth();
-        if (skanti.left_panel.expanded) {
-            $('div#notebook_panel').css({marginLeft : left_panel_width+left_panel_splitter_width});
-        } else {
-        $('div#notebook_panel').css({marginLeft : left_panel_splitter_width});
-        }
-
-
-        var pager_height = skanti.pager.percentage_height*app_height;
-        var pager_splitter_height = $('div#pager_splitter').outerHeight(true);
-        $('div#pager').height(pager_height);
-        if (skanti.pager.expanded) {
-            $('div#notebook').height(app_height-pager_height-pager_splitter_height);
-        } else {
-            $('div#notebook').height(app_height-pager_splitter_height);
-        }
     };
 
     skanti.LayoutManager = LayoutManager;

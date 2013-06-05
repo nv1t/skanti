@@ -94,6 +94,7 @@ var skanti = (function (skanti) {
             var pre_cursor = editor.getRange({line:cursor.line,ch:0},cursor).trim()+'(';
             that.request_tooltip_after_time(pre_cursor,tooltip_wait_time);
         } else if (event.keyCode === 9 && event.type == 'keydown') {
+            // TODO
             // Tab completion.
             var cur = editor.getCursor();
             //Do not trim here because of tooltip
@@ -245,13 +246,14 @@ var skanti = (function (skanti) {
         // setTimeout(that.remove_and_cancel_tooltip, 5000);
     };
 
+
     // As you type completer
     CodeCell.prototype.finish_completing = function (matched_text, matches) {
         //return if not completing or nothing to complete
         if (!this.is_completing || matches.length === 0) {return;}
 
         // for later readability
-        var key = { tab:9,
+       var key = { tab:9,
                     esc:27,
                     backspace:8,
                     space:32,
@@ -271,7 +273,7 @@ var skanti = (function (skanti) {
                         return jQuery.inArray(code, codearr) != -1;
                         }
 
-                    }
+                   }
 
         // smart completion, sort kwarg ending with '='
         var newm = new Array();

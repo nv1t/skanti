@@ -92,13 +92,6 @@ var skanti = (function (skanti) {
         return $('#'+this.cell_id);
     }
 
-    // typeset with MathJax if MathJax is available
-    Cell.prototype.typeset = function () {
-        if (window.MathJax){
-            MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-        }
-    };
-
     skanti.Cell = Cell;
 
     return skanti;

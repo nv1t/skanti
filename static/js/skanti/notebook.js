@@ -152,34 +152,6 @@ var skanti = (function (skanti) {
             return true;
         });
 
-        this.element.bind('collapse_pager', function () {
-            var app_height = $('div#main_app').height(); // content height
-            var splitter_height = $('div#pager_splitter').outerHeight(true);
-            var new_height = app_height - splitter_height;
-            that.element.animate({height : new_height + 'px'}, 'fast');
-        });
-
-        this.element.bind('expand_pager', function () {
-            var app_height = $('div#main_app').height(); // content height
-            var splitter_height = $('div#pager_splitter').outerHeight(true);
-            var pager_height = $('div#pager').outerHeight(true);
-            var new_height = app_height - pager_height - splitter_height; 
-            that.element.animate({height : new_height + 'px'}, 'fast');
-        });
-
-        this.element.bind('collapse_left_panel', function () {
-            var splitter_width = $('div#left_panel_splitter').outerWidth(true);
-            var new_margin = splitter_width;
-            $('div#notebook_panel').animate({marginLeft : new_margin + 'px'}, 'fast');
-        });
-
-        this.element.bind('expand_left_panel', function () {
-            var splitter_width = $('div#left_panel_splitter').outerWidth(true);
-            var left_panel_width = skanti.left_panel.width;
-            var new_margin = splitter_width + left_panel_width;
-            $('div#notebook_panel').animate({marginLeft : new_margin + 'px'}, 'fast');
-        });
-
         $(window).bind('beforeunload', function () {
             if (that.dirty && ! that.read_only) {
                 return "You have unsaved changes that will be lost if you leave this page.";
@@ -466,50 +438,6 @@ var skanti = (function (skanti) {
     };
 
 
-    Notebook.prototype.insert_html_cell_above = function (index) {
-        // TODO: Bounds check for i
-        var i = this.index_or_selected(index);
-        var cell = new skanti.HTMLCell(this);
-        cell.config_mathjax();
-        this.insert_cell_above(cell, i);
-        this.select(this.find_cell_index(cell));
-        return cell;
-    };
-
-
-    Notebook.prototype.insert_html_cell_below = function (index) {
-        // TODO: Bounds check for i
-        var i = this.index_or_selected(index);
-        var cell = new skanti.HTMLCell(this);
-        cell.config_mathjax();
-        this.insert_cell_below(cell, i);
-        this.select(this.find_cell_index(cell));
-        return cell;
-    };
-
-
-    Notebook.prototype.insert_markdown_cell_above = function (index) {
-        // TODO: Bounds check for i
-        var i = this.index_or_selected(index);
-        var cell = new skanti.MarkdownCell(this);
-        cell.config_mathjax();
-        this.insert_cell_above(cell, i);
-        this.select(this.find_cell_index(cell));
-        return cell;
-    };
-
-
-    Notebook.prototype.insert_markdown_cell_below = function (index) {
-        // TODO: Bounds check for i
-        var i = this.index_or_selected(index);
-        var cell = new skanti.MarkdownCell(this);
-        cell.config_mathjax();
-        this.insert_cell_below(cell, i);
-        this.select(this.find_cell_index(cell));
-        return cell;
-    };
-
-
     Notebook.prototype.to_code = function (index) {
         // TODO: Bounds check for i
         var i = this.index_or_selected(index);
@@ -523,62 +451,6 @@ var skanti = (function (skanti) {
             source_element.remove();
             target_cell.select();
         };
-        this.dirty = true;
-    };
-
-
-    Notebook.prototype.to_markdown = function (index) {
-        // TODO: Bounds check for i
-        var i = this.index_or_selected(index);
-        var source_element = this.cell_elements().eq(i);
-        var source_cell = source_element.data("cell");
-        var target_cell = null;
-        if (source_cell instanceof skanti.CodeCell) {
-            this.insert_markdown_cell_below(i);
-            target_cell = this.cells()[i+1];
-            var text = source_cell.get_code();
-        } else if (source_cell instanceof skanti.HTMLCell) {
-            this.insert_markdown_cell_below(i);
-            target_cell = this.cells()[i+1];
-            var text = source_cell.get_source();
-            if (text === source_cell.placeholder) {
-                text = target_cell.placeholder;
-            }
-        }
-        if (target_cell !== null) {
-            if (text === "") {text = target_cell.placeholder;};
-            target_cell.set_source(text);
-            source_element.remove();
-            target_cell.edit();
-        }
-        this.dirty = true;
-    };
-
-
-    Notebook.prototype.to_html = function (index) {
-        // TODO: Bounds check for i
-        var i = this.index_or_selected(index);
-        var source_element = this.cell_elements().eq(i);
-        var source_cell = source_element.data("cell");
-        var target_cell = null;
-        if (source_cell instanceof skanti.CodeCell) {
-            this.insert_html_cell_below(i);
-            target_cell = this.cells()[i+1];
-            var text = source_cell.get_code();
-        } else if (source_cell instanceof skanti.MarkdownCell) {
-            this.insert_html_cell_below(i);
-            target_cell = this.cells()[i+1];
-            var text = source_cell.get_source();
-            if (text === source_cell.placeholder) {
-                text = target_cell.placeholder;
-            }
-        }
-        if (target_cell !== null) {
-            if (text === "") {text = target_cell.placeholder;};
-            target_cell.set_source(text);
-            source_element.remove();
-            target_cell.edit();
-        }
         this.dirty = true;
     };
 
@@ -729,16 +601,8 @@ var skanti = (function (skanti) {
             var new_cell = null;
             for (i=0; i<ncells; i++) {
                 cell_data = new_cells[i];
-                if (cell_data.cell_type == 'code') {
-                    new_cell = this.insert_code_cell_below();
-                    new_cell.fromJSON(cell_data);
-                } else if (cell_data.cell_type === 'html') {
-                    new_cell = this.insert_html_cell_below();
-                    new_cell.fromJSON(cell_data);
-                } else if (cell_data.cell_type === 'markdown') {
-                    new_cell = this.insert_markdown_cell_below();
-                    new_cell.fromJSON(cell_data);
-                };
+                new_cell = this.insert_code_cell_below();
+                new_cell.fromJSON(cell_data);
             };          
         };
     };

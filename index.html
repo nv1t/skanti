@@ -1,76 +1,42 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Skanti - The other way of debugging JS</title>
 
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" charset="utf-8"></script>
-
-<script type="text/javascript">
-// MathJax disabled, set as null to distingish from *missing* MathJax,
-// where it will be undefined, and should prompt a dialog later.
-window.mathjax_url = "http://cdn.mathjax.org/mathjax/latest/MathJax.js";
-</script>
 <link rel="stylesheet" href="static/css/jquery-wijmo.css" type="text/css" />
 <link rel="stylesheet" href="static/css/codemirror.css">
-<link rel="stylesheet" href="static/css/markdown.css">
-<link rel="stylesheet" href="static/css/rst.css">
-<link rel="stylesheet" href="static/css/ipython.css">
 <link rel="stylesheet" href="static/css/default.css">
 <link rel="stylesheet" href="static/css/prettify.css"/>
 <link rel="stylesheet" href="static/css/boilerplate.css" type="text/css" />
 <link rel="stylesheet" href="static/css/layout.css" type="text/css" />
 <link rel="stylesheet" href="static/css/base.css" type="text/css" />
 <link rel="stylesheet" href="static/css/notebook.css" type="text/css" />
-<link rel="stylesheet" href="static/css/renderedhtml.css" type="text/css" />
-
-
-<meta name="read_only" content="False"/>
 </head>
 <body>
 <div id="main_app">
-<!--
-<div id="left_panel">
-</div>
-<div id="left_panel_splitter"></div>
--->
 <div id="notebook_panel">
 <div id="notebook"></div>
-<div id="pager_splitter"></div>
-<div id="pager"></div>
 </div>
 </div>
-<script src="static/js/jquery-1.6.2.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/jquery-ui-1.8.14.custom.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/jquery.autogrow.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/codemirror/codemirror.min.js" charset="utf-8"></script>
-<script src="static/js/codemirror/runmode.min.js"></script>
-<script src="static/js/codemirror/python.min.js" charset="utf-8"></script>
-<script src="static/js/codemirror/htmlmixed.min.js" charset="utf-8"></script>
-<script src="static/js/codemirror/xml.min.js" charset="utf-8"></script>
-<script src="static/js/codemirror/javascript.min.js" charset="utf-8"></script>
-<script src="static/js/codemirror/css.min.js" charset="utf-8"></script>
-<script src="static/js/codemirror/rst.min.js" charset="utf-8"></script>
-<script src="static/js/codemirror/markdown.min.js" charset="utf-8"></script>
-<script src="static/js/codemirror/markdown/Markdown.Converter.min.js" charset="utf-8"></script>
-<script src="static/js/prettify.min.js" charset="utf-8"></script>
-<script src="static/js/skanti/namespace.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/skanti/utils.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/skanti/cell.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/skanti/codecell.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="static/js/libs/jquery-1.6.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="static/js/libs/jquery-ui-1.8.14.custom.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="static/js/libs/jquery.autogrow.js" type="text/javascript" charset="utf-8"></script>
+<script src="static/js/libs/codemirror.js" charset="utf-8"></script>
+<script src="static/js/libs/runmode.js"></script>
+<script src="static/js/libs/javascript.js" charset="utf-8"></script>
+<script src="static/js/libs/prettify.js" charset="utf-8"></script>
+<script src="static/js/skanti/namespace.js" type="text/javascript" charset="utf-8"></script>
+<script src="static/js/skanti/utils.js" type="text/javascript" charset="utf-8"></script>
+<script src="static/js/skanti/cell.js" type="text/javascript" charset="utf-8"></script>
+<script src="static/js/skanti/codecell.js" type="text/javascript" charset="utf-8"></script>
 <script src="static/js/skanti/runtime.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/skanti/textcell.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/skanti/layout.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/skanti/quickhelp.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/skanti/pager.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/skanti/panelsection.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/skanti/printwidget.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/skanti/leftpanel.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="static/js/skanti/layout.js" type="text/javascript" charset="utf-8"></script>
+<script src="static/js/skanti/quickhelp.js" type="text/javascript" charset="utf-8"></script>
 <script src="static/js/skanti/notebook.js" type="text/javascript" charset="utf-8"></script>
 <script src="static/js/skanti/notebookmain.js" type="text/javascript" charset="utf-8"></script>
 <script src="static/js/skanti/functions.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/js/jquery.flot.min.js" type="text/javascript"></script>
-<script src="static/js/skanti/timer.min.js" type="text/javascript"></script>
+<script src="static/js/libs/jquery.flot.js" type="text/javascript"></script>
+<script src="static/js/skanti/timer.js" type="text/javascript"></script>
 </body>
 </html>

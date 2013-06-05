@@ -91,6 +91,34 @@ skanti.utils = (function (skanti) {
     };
 
 
+    dumpObj = function(obj, name, indent, depth) {                             
+        if(!depth) depth = 1                                
+        if(!indent) indent = ''                                           
+        if (depth > 1) {                                                  
+            return indent + name + ": <Maximum Depth Reached>\n";      
+        }                                                                 
+        if (typeof obj == "object") {                                     
+            var child = null;                                          
+            var output = ''; //indent + name + "\n";                   
+            indent += "    ";                                          
+            for (var item in obj) {                                                          
+                try {                                                
+                    child = obj[item];                            
+                } catch (e) {                                        
+                    child = "<Unable to Evaluate>";               
+                }                                                    
+                if (typeof child == "object") {                      
+                    output += indent + item + ": {\"object\"},\n"; 
+                } else if(typeof child == "function") {              
+                    output += indent + item + ": function(),\n";  
+                } else {                                              
+                    output += indent + item + ": " + child + ",\n";
+                }                                                    
+            }                                                          
+            return output;                                             
+        } else return obj;
+    } 
+
     return {
         uuid : uuid,
         fixConsole : fixConsole,

@@ -119,11 +119,21 @@ skanti.utils = (function (skanti) {
         } else return obj;
     } 
 
+    function parseError(err) {
+        var vDebug = ""; 
+        for (var prop in err)  {  
+            vDebug += "property: "+ prop+ " value: ["+ err[prop]+ "]\n";
+        } 
+        vDebug += "toString(): " + " value: [" + err.toString() + "]"; 
+        console.log(vDebug); 
+    }
+
     return {
         uuid : uuid,
         fixConsole : fixConsole,
         grow : grow,
-        dumpObj : dumpObj
+        dumpObj : dumpObj,
+        parseError: parseError
     };
 
 }(skanti));

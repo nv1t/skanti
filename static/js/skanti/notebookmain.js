@@ -36,17 +36,20 @@ $(document).ready(function () {
     });
 
 
+
     $(window).error(function(msg, url, line){
-        console.log(out)
+        console.log(msg)
         error = '<span style="color:red;">'
-        error += 'Error in "'+msg['originalEvent']['filename']+'" on line '+msg['originalEvent']['lineno']+':';
+        //error += 'Error in "'+msg['originalEvent']['filename']+'" on line '+msg['originalEvent']['lineno']+':';
+        error += 'Line '+msg['originalEvent']['lineno']+': ';
         error += msg['originalEvent']['message'];
         error += '</span>';
         
         out.html("<p>"+error+"</p>");                                         
         out.parents('.vbox').show() //css('display','block');
-        this.preventDefault();
+        //this.preventDefault();
         return false;
     });
+
 });
 

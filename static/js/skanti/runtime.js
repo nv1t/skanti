@@ -8,7 +8,7 @@ var skanti = (function (skanti) {
         if(code.slice(-1) == "?") {
             code = "info("+code.slice(0,-1)+")";
         }
-        code = 'out = $("#'+cell.cell_id+'");'+code;
+        code = 'out = $("#'+cell.cell_id+'"); eval("'+code+'");';
         $('#'+cell.cell_id).append($('<script/>').attr('type','text/javascript').html(code))
     }
 

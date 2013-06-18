@@ -17,10 +17,10 @@ $(document).ready(function () {
 
     skanti.layout_manager = new skanti.LayoutManager();
     skanti.runtime = new skanti.Runtime();
-    skanti.quick_help = new skanti.QuickHelp('span#quick_help_area');
+    //skanti.quick_help = new skanti.QuickHelp('span#quick_help_area');
     skanti.notebook = new skanti.Notebook('div#notebook');
 
-    skanti.layout_manager.do_resize();
+    //skanti.layout_manager.do_resize();
 
     // These have display: none in the css file and are made visible here to prevent FLOUC.
     $('div#header').css('display','block');
@@ -37,17 +37,16 @@ $(document).ready(function () {
 
 
     $(window).error(function(msg, url, line){
-        out.append_html("ERROR")
-        //skanti.pager.expand()
-        //skanti.pager.append_html('<span style="color:red;">')
-        //skanti.pager.append_html('Error in "'+msg['originalEvent']['filename']+'" on line '+msg['originalEvent']['lineno']+':')
-        //skanti.pager.append_html(msg['originalEvent']['message'])
-        //skanti.pager.append_html('</span>')
+        console.log(out)
+        error = '<span style="color:red;">'
+        error += 'Error in "'+msg['originalEvent']['filename']+'" on line '+msg['originalEvent']['lineno']+':';
+        error += msg['originalEvent']['message'];
+        error += '</span>';
         
-				console.log(msg);
-        //alert( { msg: msg, url: url, line: line });
-        //this.preventDefault();
-        //return false;
+        out.html("<p>"+error+"</p>");                                         
+        out.parents('.vbox').show() //css('display','block');
+        this.preventDefault();
+        return false;
     });
 });
 

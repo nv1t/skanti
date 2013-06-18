@@ -36,7 +36,7 @@ $(document).ready(function () {
     });
 
 
-		$(window).error(function(msg, url, line){
+    $(window).error(function(msg, url, line){
         out.append_html("ERROR")
         //skanti.pager.expand()
         //skanti.pager.append_html('<span style="color:red;">')

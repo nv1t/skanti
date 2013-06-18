@@ -91,7 +91,7 @@ skanti.utils = (function (skanti) {
     };
 
 
-    dumpObj = function(obj, name, indent, depth) {                             
+    function dumpObj(obj, name, indent, depth) {                             
         if(!depth) depth = 1                                
         if(!indent) indent = ''                                           
         if (depth > 1) {                                                  
@@ -122,7 +122,8 @@ skanti.utils = (function (skanti) {
     return {
         uuid : uuid,
         fixConsole : fixConsole,
-        grow : grow
+        grow : grow,
+        dumpObj : dumpObj
     };
 
 }(skanti));

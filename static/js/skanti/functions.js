@@ -32,7 +32,7 @@ function info(variable) {
                         $('<span/>').attr('style','color:'+color+';font-weight:bold').html('String Form:')
                     ).append(b))
                 
-                b.append("<pre>{\n"+utils.dumpObj(variable)+"\n}</pre>")
+                b.append("<pre>{\n"+skanti.utils.dumpObj(variable)+"\n}</pre>")
             }
             else if(type == 'function') {
                 try {
